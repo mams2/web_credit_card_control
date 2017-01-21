@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121024243) do
+ActiveRecord::Schema.define(version: 20170121160556) do
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "login",                      null: false
-    t.string   "name",                       null: false
-    t.boolean  "admin",      default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "login",                           null: false
+    t.string   "name",                            null: false
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest"
     t.index ["login"], name: "index_accounts_on_login", unique: true
   end
 
