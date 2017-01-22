@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122163449) do
+ActiveRecord::Schema.define(version: 20170122182231) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "login",                           null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20170122163449) do
     t.string  "name",             null: false
     t.integer "account_id"
     t.index ["account_id"], name: "index_credit_cards_on_account_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string  "name",       null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_users_on_account_id"
+    t.index ["name"], name: "index_users_on_name"
   end
 
 end

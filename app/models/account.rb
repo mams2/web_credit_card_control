@@ -2,6 +2,7 @@ class Account < ApplicationRecord
   before_save :downcase_login_and_titleize_name
 
   has_many :credit_cards
+  has_many :users
 
   validates :login, presence: true, length: {minimum: 4, maximum: 10},
             uniqueness: true
