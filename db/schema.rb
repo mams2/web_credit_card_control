@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122182231) do
+ActiveRecord::Schema.define(version: 20170122215737) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "login",                           null: false
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20170122182231) do
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.index ["login"], name: "index_accounts_on_login", unique: true
+  end
+
+  create_table "buys", force: :cascade do |t|
+    t.date    "purchase_date",                            null: false
+    t.integer "current_payment",                          null: false
+    t.integer "total_payment",                            null: false
+    t.float   "value",                                    null: false
+    t.string  "description",                              null: false
+    t.text    "list_of_buyers",                           null: false
+    t.boolean "payment_in_current_month", default: false, null: false
+    t.integer "credit_card_id"
+    t.index ["credit_card_id"], name: "index_buys_on_credit_card_id"
   end
 
   create_table "credit_cards", force: :cascade do |t|
