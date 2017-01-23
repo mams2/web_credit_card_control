@@ -13,7 +13,6 @@ class AccountsController < ApplicationController
   end
 
   def create
-    debugger
     @account = Account.new(account_params)
     if @account.save
       redirect_to @account
@@ -27,7 +26,6 @@ class AccountsController < ApplicationController
   end
 
   def update
-    debugger
     @account = Account.find_by(id: params[:id])
     if @account.update_attributes(account_params)
       redirect_to @account
@@ -38,6 +36,11 @@ class AccountsController < ApplicationController
 
   def destroy
     @account = Account.find_by(id: params[:id])
+    if @account.destroy
+      redirect_to account_path
+    else
+      render 'show'
+    end
   end
 
   private
