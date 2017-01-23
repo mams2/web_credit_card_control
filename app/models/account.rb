@@ -9,8 +9,7 @@ class Account < ApplicationRecord
   validates :name, presence: true, length: {minimum: 2, maximum: 20}
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 4 }
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, length: { minimum: 4 }, allow_nil: true
   private
     def downcase_login_and_titleize_name
       self.login = self.login.downcase
