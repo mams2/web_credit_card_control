@@ -1,3 +1,6 @@
 Login: <%= @account.login %> | Nome: <%=@account.name %> <p>
 <%= link_to("Editar", edit_account_path(@account.id))%>   
-<%= link_to("Deletar", @account, method: :delete, data: { confirm: "Você tem certeza?" })%>
+<%= link_to("Deletar", @account, method: :delete, data: { confirm: "Você tem certeza?" })%> <p>
+<% if log_in? %>
+<%= link_to "Log out", logout_path, method: :delete %>
+<% end%>
