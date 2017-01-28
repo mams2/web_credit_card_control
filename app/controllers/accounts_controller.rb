@@ -23,6 +23,7 @@ class AccountsController < ApplicationController
 
   def edit
     @account = Account.find_by(id: params[:id])
+    redirect_to accounts_path if @account.nil?
   end
 
   def update

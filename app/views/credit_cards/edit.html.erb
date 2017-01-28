@@ -1,0 +1,6 @@
+<%= form_for(@credit_card) do |f| %>
+  Nome do cartão <%= f.text_field :name%> <br />
+  Últimos 4 digitos <%= f.text_field :last_four_digits %> <br />
+  Data de pagamento <%= f.select :payment_day, (1..31)%> <br />
+  <%= f.submit "Atualizar" %>
+<% end %>

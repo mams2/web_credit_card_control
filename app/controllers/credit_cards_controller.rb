@@ -23,6 +23,29 @@ class CreditCardsController < ApplicationController
     redirect_to current_account if @credit_card.nil?
   end
 
+  def edit
+    @credit_card =CreditCard.find_by(id: params[:id])
+    redirect_to current_account if @credit_card.nil?
+  end
+
+  def update
+    @credit_card =CreditCard.find_by(id: params[:id])
+    if @credit_card.update_attributes(credit_cards_params)
+      redirect_to @credit_card
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @credit_card = Account.find_by(id: params[:id])
+    if @credit_card.destroy
+      redirect_to current_account
+    else
+      render 'show'
+    end
+  end
+
   private
     def credit_cards_params
       params.require(:credit_card).permit(:name, :last_four_digits, :payment_day)
