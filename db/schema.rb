@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122215737) do
+ActiveRecord::Schema.define(version: 20170128175855) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "login",                           null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170122215737) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.date    "payment_date",     null: false
+    t.integer "payment_day",      null: false
     t.string  "last_four_digits", null: false
     t.string  "name",             null: false
     t.integer "account_id"
