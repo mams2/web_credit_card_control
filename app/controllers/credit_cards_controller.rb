@@ -38,7 +38,7 @@ class CreditCardsController < ApplicationController
   end
 
   def destroy
-    @credit_card = Account.find_by(id: params[:id])
+    @credit_card = CreditCard.find_by(id: params[:id])
     if @credit_card.destroy
       redirect_to current_account
     else

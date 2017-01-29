@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   resources :accounts
   resources :credit_cards, :except => [:index]
+  resources :users, :except => [:show]
 end

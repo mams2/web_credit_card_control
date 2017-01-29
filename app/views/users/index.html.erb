@@ -1,0 +1,5 @@
+<% @users.each do |user| %>
+  Nome: <%= user.name %> <br/>
+  <%= link_to 'Editar', edit_user_path(user.id) %> 
+  <%= link_to('Deletar', user, method: :delete, data: { confirm: "Você tem certeza?" }) %> <br/>
+<% end %>
