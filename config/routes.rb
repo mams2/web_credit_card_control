@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   resources :accounts
-  resources :credit_cards, :except => [:index]
+  resources :credit_cards, :except => [:index] do
+    resources :buys, :except => [:index, :show]
+  end
   resources :users, :except => [:show]
 end
