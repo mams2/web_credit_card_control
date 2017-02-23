@@ -1,4 +1,5 @@
 class Buy < ApplicationRecord
+  belongs_to :credit_card
   serialize :list_of_buyers, Hash
 
   validates :purchase_date, presence: true
@@ -32,7 +33,6 @@ class Buy < ApplicationRecord
     def validate_list_of_buyers
       return if self.list_of_buyers.blank?
       errors.add(:list_of_buyers, "don't match with value") unless (self.list_of_buyers.map{|key,value| value}.reduce(:+)-value).abs < 0.05
-      debugger
       errors.add(:list_of_buyers, "one or more users don't exist") unless self.list_of_buyers.all?{|key,value| !User.find_by(account_id: fetch_account_id, name: key).nil?}
     end
 

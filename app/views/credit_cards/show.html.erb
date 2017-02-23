@@ -1,3 +1,17 @@
 Nome do cartão: <%= @credit_card.name %>  <br />
 Ultimos 4 dígitos: <%= @credit_card.last_four_digits %> <br/>
 Dia de pagamento: <%= @credit_card.payment_day %> <br/>
+
+<hr/>
+
+<% @credit_card.buys.each do |buy| %>
+  <%= buy.purchase_date.strftime("%d/%m/%y")%> <%= buy.description %> 
+  (<%= buy.current_payment%>/<%= buy.total_payment%>) 
+  <%=number_to_currency(buy.value/buy.total_payment, locale: :br)%><br/>
+  
+  <% buy.list_of_buyers.each do |name,value| %>
+    <ul><%= name %> <%=number_to_currency(value/buy.total_payment, locale: :br)%><br/> </ul>
+  <%end%>
+<% end %>
+
+<%= %>

@@ -5,9 +5,11 @@
   Parcela atual <%= f.select :current_payment, (1..12) %> <br/>
   Total de parcelas <%= f.select :total_payment, (1..12) %> <br/>
   
-  <div class="clone">
-    Nome: <input type="textbox" name="list_of_buyers[][name]" />
-    Valor: <input type="number" name="list_of_buyers[][value]"/> <br/>
-  </div>
-  <%= f.submit 'Registrar compra' %>
+  <% @buy.list_of_buyers.each do |key,value| %>
+    <div class="clone">
+      Nome: <input type="textbox" name="list_of_buyers[][name]" value= <%=key%>  />
+      Valor: <input type="number" name="list_of_buyers[][value]" value= <%=value%> /> <br/>
+    </div>
+    <%= f.submit 'Atualizar compra' %>
+  <% end %>
 <% end %>
