@@ -1,13 +1,19 @@
 Nome do cartão: <%= @credit_card.name %>  <br />
 Ultimos 4 dígitos: <%= @credit_card.last_four_digits %> <br/>
 Dia de pagamento: <%= @credit_card.payment_day %> <br/>
-
+<%= link_to('Editar', edit_credit_card_path(@credit_card.id))%>
+<%= link_to('Deletar', @credit_card, method: :delete, data: { confirm: "Você tem certeza?" })%>
 <hr/>
+
+<%= link_to('Adicionar nova compra', new_credit_card_buy_path(@credit_card.id)) %> <br/> <br/>
 
 <% @credit_card.buys.each do |buy| %>
   <%= buy.purchase_date.strftime("%d/%m/%y")%> <%= buy.description %> 
   (<%= buy.current_payment%>/<%= buy.total_payment%>) 
-  <%=number_to_currency(buy.value/buy.total_payment, locale: :br)%><br/>
+  <%=number_to_currency(buy.value/buy.total_payment, locale: :br)%>
+  <%= link_to('Editar', edit_credit_card_buy_path(@credit_card.id,buy.id))%>
+  <%= link_to('Deletar', credit_card_buy_path(@credit_card.id,buy.id), method: :delete, data: { confirm: "Você tem certeza?" })%>
+  <br/>
   
   <% buy.list_of_buyers.each do |name,value| %>
     <ul><%= name %> <%=number_to_currency(value/buy.total_payment, locale: :br)%><br/> </ul>

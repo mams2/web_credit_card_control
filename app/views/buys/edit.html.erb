@@ -1,4 +1,4 @@
-<%= form_for(@buy, url: credit_card_buys_path) do |f| %>
+<%= form_for(@buy, url: credit_card_buy_path, method: :put) do |f| %>
   Data da compra <%= f.date_select :purchase_date, use_month_numbers: true, order: [:day, :month, :year] %> <br/>
   Descrição: <%= f.text_field :description %> <br/>
   Valor <%= f.number_field :value, step: :any %> <br/>
