@@ -1,6 +1,6 @@
 class CreditCard < ApplicationRecord
   belongs_to :account
-  has_many :buys
+  has_many :buys, dependent: :destroy
   validate :validate_last_four_digits, :validate_payment_day
 
   validates :account_id, presence: true
