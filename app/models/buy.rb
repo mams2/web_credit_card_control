@@ -15,7 +15,7 @@ class Buy < ApplicationRecord
 
   private
     def validate_positive_value
-      errors.add(:value, "should be greater than 0.0") unless self.value > 0.0
+      errors.add(:value, "should be greater than 0.0") unless self.value > 0.0 if self.value
     end
 
     def validate_current_payment
@@ -31,7 +31,7 @@ class Buy < ApplicationRecord
     end
 
     def validate_list_of_buyers
-      return if self.list_of_buyers.blank?
+      return if self.list_of_buyers.blank? || !self.value
       errors.add(:list_of_buyers, "don't match with value") unless (self.list_of_buyers.map{|key,value| value}.reduce(:+)-value).abs < 0.05
       errors.add(:list_of_buyers, "one or more users don't exist") unless self.list_of_buyers.all?{|key,value| !User.find_by(account_id: fetch_account_id, name: key).nil?}
     end
