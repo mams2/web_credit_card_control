@@ -40,7 +40,7 @@ class UserTest < ActiveSupport::TestCase
     assert user2.valid?
   end
 
-  test "account id should be present" do
+  test "account_id should be present" do
     user = User.new(name: "teste")
     assert_not user.valid?
     assert_equal ["Account must exist", "Account can't be blank"], user.errors.full_messages

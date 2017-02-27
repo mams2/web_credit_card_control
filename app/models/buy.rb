@@ -19,19 +19,22 @@ class Buy < ApplicationRecord
     end
 
     def validate_current_payment
+      return if self.current_payment.nil?
       errors.add(:current_payment, "should be greater than 0") unless self.current_payment > 0.0
     end
 
     def validate_total_payment
+      return if self.total_payment.nil?
       errors.add(:total_payment, "should be greater than 0") unless self.total_payment > 0.0
     end
 
     def validate_current_payment_lt_total_payment
+      return if self.current_payment.nil? || self.total_payment.nil?
       errors.add(:total_payment, "should be greater or equal than current_payment") unless self.current_payment <= self.total_payment
     end
 
     def validate_list_of_buyers
-      return if self.list_of_buyers.blank? || !self.value
+      return if self.list_of_buyers.blank? || self.value.nil? || self.credit_card_id.nil?
       errors.add(:list_of_buyers, "don't match with value") unless (self.list_of_buyers.map{|key,value| value}.reduce(:+)-value).abs < 0.05
       errors.add(:list_of_buyers, "one or more users don't exist") unless self.list_of_buyers.all?{|key,value| !User.find_by(account_id: fetch_account_id, name: key).nil?}
     end
