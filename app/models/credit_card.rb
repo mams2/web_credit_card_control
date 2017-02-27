@@ -18,6 +18,7 @@ class CreditCard < ApplicationRecord
     end
 
     def validate_payment_day
+      return if self.payment_day.nil?
       errors.add(:payment_day, "should be a valid day") unless self.payment_day>0 && self.payment_day <=31
     end
 end
