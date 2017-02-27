@@ -1,0 +1,11 @@
+jose:
+  name: 'jose'
+  login: 'jose'
+  password_digest: '1234'
+  admin: true
+
+pedro:
+  name: 'pedro'
+  login: 'pedro'
+  password_digest: '1234'
+  admin: true  
