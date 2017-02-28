@@ -1,15 +1,52 @@
-<%= form_for(@buy, url: credit_card_buy_path, method: :put) do |f| %>
-  Data da compra <%= f.date_select :purchase_date, use_month_numbers: true, order: [:day, :month, :year] %> <br/>
-  Descrição: <%= f.text_field :description %> <br/>
-  Valor <%= f.number_field :value, step: :any %> <br/>
-  Parcela atual <%= f.select :current_payment, (1..12) %> <br/>
-  Total de parcelas <%= f.select :total_payment, (1..12) %> <br/>
-  
-  <% @buy.list_of_buyers.each do |key,value| %>
-    <div class="clone">
-      Nome: <input type="textbox" name="list_of_buyers[][name]" value= <%=key%>  />
-      Valor: <input type="number" name="list_of_buyers[][value]" value= <%=value%> /> <br/>
-    </div>
-    <%= f.submit 'Atualizar compra' %>
-  <% end %>
-<% end %>
+<div class="text-center">
+  <h1>Cadastrar compra</h1>
+  <hr/>
+  <%= form_for(@buy, url: credit_card_buy_path, method: :put) do |f| %>
+
+    <div class="col-md-offset-2 col-md-7 ">
+      <div class="form-group">
+        <label>Data da compra:</label> 
+        <%= f.date_select :purchase_date, use_month_numbers: true, order: [:day, :month, :year], class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <label>Descrição:</label> 
+        <%= f.text_field :description, class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <label>Valor:</label> 
+        <%= f.number_field :value, step: :any, class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <label>Parcela atual:</label> 
+        <%= f.select :current_payment, (1..12), class: "form-control"%>
+        <label>Total de parcelas:</label> 
+        <%= f.select :total_payment, (1..12), class: "form-control"%>
+      </div>
+
+      <div id="clone_new_link" class="form-group">
+        <%id=0%>
+        <script type="text/javascript"> ct = <%= @buy.list_of_buyers.count%> </script>
+        <% @buy.list_of_buyers.each do |key,value| %>
+          <% id=id+1 %>
+          <div id=<%=id%>>
+            <label>Nome:</label> <input type="textbox" name="list_of_buyers[][name]" value= <%=key%> />
+            <label>Valor:</label> <input type="number" name="list_of_buyers[][value]" value= <%=value%> />
+          </div>
+        <% end %>
+      </div>
+
+      <a href="javascript:new_link()" class="btn btn-success">Adicionar comprador </a>
+      <a href="javascript:del()" class="btn btn-danger">Remover comprador</a> <br/><br>
+      <%= f.submit 'Atualizar compra', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Template -->
+<div id="clone_new_link_tpl" style="display:none">
+  <label>Nome:</label> <input type="textbox" name="list_of_buyers[][name]" />
+  <label>Valor:</label> <input type="number" name="list_of_buyers[][value]"/>
+</div>

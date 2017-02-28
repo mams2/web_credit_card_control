@@ -1,18 +1,19 @@
-Login: <%= @account.login %> | Nome: <%=@account.name %> <br />
-<%= link_to("Editar", edit_account_path(@account.id))%>   
-<%= link_to("Deletar", @account, method: :delete, data: { confirm: "Você tem certeza?" })%> <br />
-<% if log_in? %>
-<%= link_to "Log out", logout_path, method: :delete %>
-<% end%>
+<div class = "text-center" >
+  <h1> <%=@account.name %>(<%= @account.login %>) </h1><br />
+  <%= link_to("Adicionar", new_account_path, class: "btn btn-success btn-xs") if current_account.admin %> 
+  <%= link_to("Editar", edit_account_path(@account.id), class: "btn btn-warning btn-xs")%>   
+  <%= link_to("Deletar", @account, method: :delete, data: { confirm: "Você tem certeza?" }, 
+              class: "btn btn-danger btn-xs")%> <br />
+  <hr/>
+  <br/><br/><br/>
+  <%= link_to 'cadastrar novo usuário', new_user_path %> <br/>
+  <%= link_to 'listar usuários', users_path %>
+  <br/><br/><br/>
 
-<br/><br/><br/>
-<%= link_to 'cadastrar novo usuário', new_user_path %> <br/>
-<%= link_to 'listar usuários', users_path %>
-<br/><br/><br/>
+  <%= link_to 'Cadastrar novo cartão', new_credit_card_path %> <br/>
+  Cartões de creditos da conta: <br/>
 
-<%= link_to 'Cadastrar novo cartão', new_credit_card_path %> <br/>
-Cartões de creditos da conta: <br/>
-
-<% @account.credit_cards.each do |credit_card|%>
-  <%= link_to credit_card.name + '  ' + credit_card.last_four_digits , credit_card %> <br/>
-<% end %>
+  <% @account.credit_cards.each do |credit_card|%>
+    <%= link_to credit_card.name + '  ' + credit_card.last_four_digits , credit_card %> <br/>
+  <% end %>
+</div>
