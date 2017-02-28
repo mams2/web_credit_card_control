@@ -9,6 +9,57 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="wrapper">
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <%=link_to('Inicio',root_path, class: "navbar-brand")%>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+          <% if log_in? %>
+            <li class="dropdown">
+              <%= link_to( "#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown") do%>
+                <i class="fa fa-user"></i> <%= current_account.name%> <b class="caret"></b>
+              <% end %>
+                <ul class="dropdown-menu">
+                    <li>
+                      <%= link_to users_path do %>
+                        <i class="fa fa-fw fa-user"></i> Usuários
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to '#' do %>
+                        <i class="fa fa-credit-card"></i> Cartão de Crédito
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to current_account do %>
+                        <i class="fa fa-fw fa-gear"></i> Conta
+                      <% end %>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to logout_path, method: :delete do %>
+                        <i class="fa fa-fw fa-power-off"></i> Log Out
+                      <% end %>
+                    </li>
+                </ul>
+            </li>
+          <% else %>
+            <li class="dropdown">
+              <%= link_to( login_path, "class"=>"dropdown-toggle") do%>
+                Login
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+    <div id="page-wrapper">
+      <div class="container ">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
