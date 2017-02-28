@@ -1,5 +1,13 @@
-<%= form_for :session do |f| %>
-  login: <%= f.text_field :login %><br />
-  password : <%= f.password_field :password %><br />
-  <%= f.submit 'login' %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-5 col-md-3">
+      <div class="form-login">
+        <h4>Faça o Login</h4>
+          <%= form_for :session do |f| %>
+            <%= f.text_field :login , class: "form-control input-sm chat-input", placeholder: "login"%><br />
+            <%= f.password_field :password, class: "form-control input-sm chat-input", placeholder: "password" %><br />
+            <%= f.submit 'login', class:"wrapper group-btn btn btn-primary btn-md"%>
+          <% end %>        
+        </div>
+    </div>
+</div>
