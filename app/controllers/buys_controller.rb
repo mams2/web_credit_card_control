@@ -47,6 +47,6 @@ class BuysController < ApplicationController
   private
     def buys_params
       params.require(:buy).permit(:purchase_date, :description, :value, :current_payment,
-                                  :total_payment)
+                                  :total_payment, :payment_in_current_month)
     end
 end

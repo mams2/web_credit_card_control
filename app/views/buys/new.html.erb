@@ -23,7 +23,9 @@
         <label>Parcela atual:</label> 
         <%= f.select :current_payment, (1..12), class: "form-control"%>
         <label>Total de parcelas:</label> 
-        <%= f.select :total_payment, (1..12), class: "form-control"%>
+        <%= f.select :total_payment, (1..12), class: "form-control"%> <br/>
+        <%= f.check_box :payment_in_current_month %>
+        <label>fatura aberta no momento da compra? (apenas para novas compras)</label> 
       </div>
     
       <div id="clone_new_link" class="form-group">

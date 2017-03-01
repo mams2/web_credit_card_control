@@ -18,6 +18,11 @@ class CreditCardsController < ApplicationController
     end
   end
 
+  def index
+    @credit_cards = current_account.credit_cards if log_in?
+    redirect_to login_path if @credit_cards.nil?
+  end
+
   def show
     @credit_card = CreditCard.find_by(id: params[:id])
     redirect_to current_account if @credit_card.nil?

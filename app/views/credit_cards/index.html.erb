@@ -1,0 +1,7 @@
+<% @credit_cards.each do |credit_card| %>
+  Nome do cartão: <%=link_to( credit_card.name,credit_card)%>  <br />
+  Ultimos 4 dígitos: <%= credit_card.last_four_digits %> <br/>
+  Dia de pagamento: <%= credit_card.payment_day %> <br/>
+  <%= link_to('Editar', edit_credit_card_path(credit_card.id))%>
+<%= link_to('Deletar', credit_card, method: :delete, data: { confirm: "Você tem certeza?" })%>
+<% end %>
