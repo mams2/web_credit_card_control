@@ -25,6 +25,8 @@ class CreditCardsController < ApplicationController
 
   def show
     @credit_card = CreditCard.find_by(id: params[:id])
+    @total = 0
+    @buyers={}
     redirect_to current_account if @credit_card.nil?
   end
 

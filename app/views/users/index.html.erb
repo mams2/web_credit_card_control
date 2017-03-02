@@ -1,5 +1,15 @@
-<% @users.each do |user| %>
-  Nome: <%= user.name %> <br/>
-  <%= link_to 'Editar', edit_user_path(user.id) %> 
-  <%= link_to('Deletar', user, method: :delete, data: { confirm: "Você tem certeza?" }) %> <br/>
-<% end %>
+<div class="col-md-offset-4 col-md-1">
+  <%= link_to 'Cadastrar usuário', new_user_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br/><br><br>
+<div class="text-center">
+  <div class="jumbotron" style="background:#C0C0C0 !important">
+    <h2>Usuários cadastrados</h2>
+      <% @users.sort_by{|u| u.name}.each do |user| %>
+        <div class="col-lg-6"><b> <%= user.name.titleize %> </b></div>
+        <%= link_to('Editar', edit_user_path(user.id), class: "btn btn-warning btn-xs") %> 
+        <%= link_to('Deletar', user, method: :delete, data: { confirm: "Você tem certeza?" },
+                      class: "btn btn-danger btn-xs") %>
+      <% end %>
+  </div>
+</div>

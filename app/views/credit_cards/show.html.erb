@@ -1,23 +1,30 @@
-Nome do cartão: <%= @credit_card.name %>  <br />
-Ultimos 4 dígitos: <%= @credit_card.last_four_digits %> <br/>
-Dia de pagamento: <%= @credit_card.payment_day %> <br/>
-<%= link_to('Editar', edit_credit_card_path(@credit_card.id))%>
-<%= link_to('Deletar', @credit_card, method: :delete, data: { confirm: "Você tem certeza?" })%>
-<hr/>
-
-<%= link_to('Adicionar nova compra', new_credit_card_buy_path(@credit_card.id)) %> <br/> <br/>
-
-<% @credit_card.buys.each do |buy| %>
-  <%= buy.purchase_date.strftime("%d/%m/%y")%> <%= buy.description %> 
-  (<%= buy.current_payment%>/<%= buy.total_payment%>) 
-  <%=number_to_currency(buy.value/buy.total_payment, locale: :br)%>
-  <%= link_to('Editar', edit_credit_card_buy_path(@credit_card.id,buy.id))%>
-  <%= link_to('Deletar', credit_card_buy_path(@credit_card.id,buy.id), method: :delete, data: { confirm: "Você tem certeza?" })%>
-  <br/>
-  
-  <% buy.list_of_buyers.each do |name,value| %>
-    <ul><%= name %> <%=number_to_currency(value/buy.total_payment, locale: :br)%><br/> </ul>
-  <%end%>
-<% end %>
-
-<%= %>
+<div class = "text-center" >
+  <h2><%= @credit_card.name %> </h2>
+  Ultimos 4 dígitos: <%= @credit_card.last_four_digits %> <br/>
+  Dia de pagamento: <%= @credit_card.payment_day %> <br/>
+  <%= link_to('Adicionar compra', new_credit_card_buy_path(@credit_card.id), class:"btn btn-primary btn-xs") %>
+  <%= link_to('Editar', edit_credit_card_path(@credit_card.id), class: "btn btn-warning btn-xs")%>
+  <%= link_to('Deletar', @credit_card, method: :delete, data: { confirm: "Você tem certeza?" },
+              class: "btn btn-danger btn-xs")%>
+  <hr/>
+</div>
+<div class="jumbotron" style="background:#C0C0C0 !important">
+  <% @credit_card.buys.each do |buy| %>
+    <%= buy.purchase_date.strftime("%d/%m/%y")%> <label><%= buy.description %> </label>
+    (<%= buy.current_payment%>/<%= buy.total_payment%>) 
+    <b><%=number_to_currency(buy.value/buy.total_payment, locale: :br)%></b>
+    <br/>
+    <% @total+=buy.value/buy.total_payment %>
+    <% buy.list_of_buyers.each do |name,value| %>
+      <ul><%= name.titleize %> <%=number_to_currency(value/buy.total_payment, locale: :br)%><br/> </ul>
+      <% @buyers[name]=0 if @buyers[name].nil?%>
+      <% @buyers[name]+=value/buy.total_payment%>
+    <%end%>
+    <%= link_to('Editar', edit_credit_card_buy_path(@credit_card.id,buy.id),class: "btn btn-warning btn-xs")%>
+    <%= link_to('Deletar', credit_card_buy_path(@credit_card.id,buy.id), method: :delete, data: { confirm: "Você tem certeza?"}, class: "btn btn-danger btn-xs")%> <br/><br/>
+  <% end %>
+  <%="Total: "%> <b><%=number_to_currency(@total, locale: :br)%></b> <br/>
+  <% @buyers.each do |buyer,value| %>
+    <%= buyer.titleize%>: <b><%=number_to_currency(value, locale: :br)%></b> <br/>
+  <% end %>
+</div>
