@@ -6,10 +6,10 @@
   <div class="jumbotron" style="background:#C0C0C0 !important">
     <h2>Usuários cadastrados</h2>
       <% @users.sort_by{|u| u.name}.each do |user| %>
-        <div class="col-lg-6"><b> <%= user.name.titleize %> </b></div>
+        <b> <%= user.name.titleize %> </b> <br/>
         <%= link_to('Editar', edit_user_path(user.id), class: "btn btn-warning btn-xs") %> 
         <%= link_to('Deletar', user, method: :delete, data: { confirm: "Você tem certeza?" },
-                      class: "btn btn-danger btn-xs") %>
+                      class: "btn btn-danger btn-xs") %> <br/>
       <% end %>
   </div>
 </div>
