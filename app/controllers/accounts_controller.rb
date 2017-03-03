@@ -3,7 +3,11 @@ class AccountsController < ApplicationController
     if log_in? && current_account.admin
       @accounts = Account.all
     else
-      redirect_to current_account
+      if log_in?
+        redirect_to current_account
+      else
+        redirect_to login_path
+      end
     end
   end
 
