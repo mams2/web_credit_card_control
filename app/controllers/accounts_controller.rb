@@ -1,23 +1,36 @@
 class AccountsController < ApplicationController
   def index
-    if log_in? && current_account.admin
-      @accounts = Account.all
-    else
-      if log_in?
-        redirect_to current_account
+    if log_in?
+      if current_account.admin
+        @accounts = Account.all
       else
-        redirect_to login_path
+        redirect_to current_account
       end
+    else
+      redirect_to login_path
     end
   end
 
   def show
-    @account = Account.find_by(id: params[:id])
-    redirect_to accounts_path if @account.nil?
+    if log_in?
+      @account = Account.find_by(id: params[:id])
+      if @account.nil?
+        redirect_to accounts_path
+      elsif current_account != @account && !current_account.admin
+        redirect_to current_account
+      end
+    else
+      redirect_to login_path
+    end 
   end
 
   def new
-    @account = Account.new
+    if log_in?
+      redirect_to current_account unless current_account.admin
+      @account = Account.new
+    else
+      redirect_to login_path
+    end  
   end
 
   def create
@@ -30,8 +43,10 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    @account = Account.find_by(id: params[:id])
-    redirect_to accounts_path if @account.nil?
+    if log_in?
+      @account = Account.find_by(id: params[:id])
+      redirect_to accounts_path if @account.nil? || (current_account != @account && !current_account.admin)
+    end
   end
 
   def update

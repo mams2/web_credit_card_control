@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to login_path unless log_in?
     @user = User.new
   end
 
@@ -24,8 +25,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: params[:id])
-    redirect_to current_account if @user.nil?
+    if log_in?
+      @user = User.find_by(id: params[:id])
+      redirect_to current_account if @user.nil? || (current_account.id != @user.account_id && !current_account.admin)
+    else
+      redirect_to login_path
+    end
   end
 
   def update
