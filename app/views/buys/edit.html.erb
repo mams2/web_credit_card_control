@@ -32,8 +32,8 @@
         <% @buy.list_of_buyers.each do |key,value| %>
           <% id=id+1 %>
           <div id=<%=id%>>
-            <label>Nome:</label> <input type="textbox" name="list_of_buyers[][name]" value= <%=key%> />
-            <label>Valor:</label> <input type="number" name="list_of_buyers[][value]" value= <%=value%> />
+            <label>Nome:</label> <input type="textbox" name="list_of_buyers[][name]" value= "<%=key%>" />
+            <label>Valor:</label> <input type="number" name="list_of_buyers[][value]" value= "<%=value%>" />
           </div>
         <% end %>
       </div>

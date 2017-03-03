@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_save :downcase_name
   before_destroy :destroy_buys
+  after_update :uptade_buys
   belongs_to :account
 
   validates :account_id, presence: true
@@ -14,9 +15,19 @@ class User < ApplicationRecord
     end
 
     def destroy_buys
-      Buy.all.each do |b|
-        dependency = b.list_of_buyers.detect{|name,value| self.name == name}
-        b.delete if dependency
+      Buy.all.each do |buy|
+        dependency = buy.list_of_buyers.detect{|name,value| self.name == name}
+        buy.delete if dependency
+      end
+    end
+
+    def uptade_buys
+      teste = Buy.all.each do |buy|
+        dependency = buy.list_of_buyers.detect{|name,value| self.name_was == name}
+        if dependency
+          buy.list_of_buyers[self.name] = buy.list_of_buyers.delete(self.name_was)
+          buy.save
+        end
       end
     end
 end
