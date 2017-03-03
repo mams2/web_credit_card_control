@@ -1,6 +1,7 @@
 class CreditCardsController < ApplicationController
 
   def new
+    redirect_to login_path unless log_in?
     @credit_card = CreditCard.new
   end
 
@@ -24,15 +25,25 @@ class CreditCardsController < ApplicationController
   end
 
   def show
-    @credit_card = CreditCard.find_by(id: params[:id])
-    @total = 0
-    @buyers={}
-    redirect_to current_account if @credit_card.nil?
+    if log_in?
+      @credit_card = CreditCard.find_by(id: params[:id])
+      @total = 0
+      @buyers={}
+      redirect_to current_account if @credit_card.nil? || 
+                                    (current_account.id != @credit_card.account_id && !current_account.admin)
+    else
+      redirect_to login_path
+    end
   end
 
   def edit
-    @credit_card =CreditCard.find_by(id: params[:id])
-    redirect_to current_account if @credit_card.nil?
+    if log_in?
+      @credit_card =CreditCard.find_by(id: params[:id])
+      redirect_to current_account if @credit_card.nil? ||
+                                    (current_account.id != @credit_card.account_id && !current_account.admin)
+    else
+      redirect_to login_path
+    end
   end
 
   def update
