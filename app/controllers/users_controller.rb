@@ -47,7 +47,6 @@ class UsersController < ApplicationController
     if @user.destroy
       redirect_to current_account
     else
-      #exibir mensagem de erro
       redirect_to current_account
     end
   end

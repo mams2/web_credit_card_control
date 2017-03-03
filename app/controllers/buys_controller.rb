@@ -1,5 +1,6 @@
 class BuysController < ApplicationController
   def new
+    redirect_to login_path unless log_in?
     @buy = Buy.new
   end
 
@@ -21,8 +22,13 @@ class BuysController < ApplicationController
   end
 
   def edit
-    @buy = Buy.find_by(id: params[:id])
-    redirect_to current_account if @buy.nil?
+    if log_in?
+      @buy = Buy.find_by(id: params[:id])
+      redirect_to current_account if @buy.nil? || 
+                                    (current_account.id != @buy.credit_card.account.id && !current_account.admin)
+    else
+      redirect_to login_path
+    end
   end
 
   def update
