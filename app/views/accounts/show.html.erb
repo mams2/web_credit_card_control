@@ -6,15 +6,15 @@
               class: "btn btn-danger btn-xs")%> <br />
   <hr/>
   <div class="jumbotron" style="background:#C0C0C0 !important">
-    <%= link_to 'cadastrar novo usuário', new_user_path %> <br/>
-    <%= link_to 'listar usuários', users_path %>
-    <br/><br/><br/>
+    <h2><%= link_to 'cadastrar usuário', new_user_path %></h2>
+    <h4><%= link_to 'listar usuários', users_path %></h4>
+    <br/>
 
-    <%= link_to 'Cadastrar novo cartão', new_credit_card_path %> <br/>
-    Cartões de creditos da conta: <br/>
+    <h2><%= link_to 'Cadastrar cartão', new_credit_card_path %> </h2>
+    <h4>Cartões de creditos cadastrados: </h4>
 
     <% @account.credit_cards.each do |credit_card|%>
-      <%= link_to credit_card.name + '  ' + credit_card.last_four_digits , credit_card %> <br/>
+      <h4><%= link_to credit_card.name + '  ' + credit_card.last_four_digits , credit_card %> </h4>
     <% end %>
   </div>
 </div>

@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
   def index
-    @accounts = Account.all
+    if log_in? && current_account.admin
+      @accounts = Account.all
+    else
+      redirect_to current_account
+    end
   end
 
   def show

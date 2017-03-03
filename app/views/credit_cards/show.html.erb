@@ -3,8 +3,8 @@
   Ultimos 4 dígitos: <%= @credit_card.last_four_digits %> <br/>
   Dia de pagamento: <%= @credit_card.payment_day %> <br/>
   <%= link_to('Adicionar compra', new_credit_card_buy_path(@credit_card.id), class:"btn btn-primary btn-xs") %>
-  <%= link_to('Editar', edit_credit_card_path(@credit_card.id), class: "btn btn-warning btn-xs")%>
-  <%= link_to('Deletar', @credit_card, method: :delete, data: { confirm: "Você tem certeza?" },
+  <%= link_to('Editar Cartão', edit_credit_card_path(@credit_card.id), class: "btn btn-warning btn-xs")%>
+  <%= link_to('Deletar Cartão', @credit_card, method: :delete, data: { confirm: "Você tem certeza?" },
               class: "btn btn-danger btn-xs")%>
   <hr/>
 </div>

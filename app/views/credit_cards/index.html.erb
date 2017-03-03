@@ -1,7 +1,16 @@
-<% @credit_cards.each do |credit_card| %>
-  Nome do cartão: <%=link_to( credit_card.name,credit_card)%>  <br />
-  Ultimos 4 dígitos: <%= credit_card.last_four_digits %> <br/>
-  Dia de pagamento: <%= credit_card.payment_day %> <br/>
-  <%= link_to('Editar', edit_credit_card_path(credit_card.id))%>
-<%= link_to('Deletar', credit_card, method: :delete, data: { confirm: "Você tem certeza?" })%>
-<% end %>
+<div class="col-md-offset-4 col-md-1">
+   <%= link_to 'Cadastrar cartão', new_credit_card_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br/><br/><br/>
+<div class = "text-center" >
+  <div class="jumbotron" style="background:#C0C0C0 !important">
+    <% @credit_cards.each do |credit_card| %>
+      <h2><%=link_to( credit_card.name,credit_card)%> </h2>
+      Ultimos 4 dígitos: <%= credit_card.last_four_digits %> <br/>
+      Dia de pagamento: <%= credit_card.payment_day %> <br/>
+      <%= link_to('Editar', edit_credit_card_path(credit_card.id), class: "btn btn-warning btn-xs")%>
+    <%= link_to('Deletar', credit_card, method: :delete, data: { confirm: "Você tem certeza?" },
+                class: "btn btn-danger btn-xs")%>
+    <% end %>
+  </div>
+</div>

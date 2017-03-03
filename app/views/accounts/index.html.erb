@@ -1,6 +1,11 @@
-<% @accounts.each do |account| %>
-  id: <%= account.id %> <br />
-  Login: <%= link_to account.login, account %> | Nome: <%=account.name %> <br />
-  <%= link_to("Editar", edit_account_path(account.id))%>   
-<%= link_to("Deletar", account, method: :delete, data: { confirm: "Você tem certeza?" })%>
-<%end%>
+<div class = "text-center" >
+  <div class="jumbotron" style="background:#C0C0C0 !important">
+    <% @accounts.each do |account| %>
+      id: <%= account.id %> <br />
+      Login: <%= link_to account.login, account %> | Nome: <%=account.name %> <br />
+      <%= link_to("Editar", edit_account_path(account.id),class: "btn btn-warning btn-xs")%>   
+    <%= link_to("Deletar", account, method: :delete, data: { confirm: "Você tem certeza?" },
+                class: "btn btn-danger btn-xs")%> <br/><br/>
+    <%end%>
+  </div>
+</div>
