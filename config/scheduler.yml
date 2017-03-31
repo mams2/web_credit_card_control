@@ -1,0 +1,4 @@
+beer_on_rails:
+  cron: "* * * * *"
+  class: "BeerOnRailsWorker"
+  queue: :default
